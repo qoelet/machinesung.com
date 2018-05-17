@@ -1,0 +1,47 @@
+@font-face{
+  font-family: 'Uni553';
+  src: url('../fonts/uni0553-webfont.eot');
+  src: url('../fonts/uni0553-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/uni0553-webfont.woff') format('woff'),
+       url('../fonts/uni0553-webfont.ttf') format('truetype');
+}
+body {
+  margin: 2rem;
+  background: #f8f8f8;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+}
+h1 {
+  font-size: 4rem;
+  font-family: 'Uni553', sans-serif;
+  color: #ccc;
+  text-transform: lowercase;
+}
+h2 {
+  font-size: 2.5rem;
+  font-family: 'Uni553', sans-serif;
+  color: #555;
+  text-transform: lowercase;
+}
+h3 {
+  font-size: 2rem;
+  font-family: 'Uni553', sans-serif;
+  color: #777;
+  text-transform: lowercase;
+}
+footer {
+  font-size: 1rem;
+  margin-top: 2rem;
+}
+a {
+  color: #2243a0ad;
+}
+.svg-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+.arrow {
+  font-size: 2rem;
+  font-family: 'Uni553', sans-serif;
+}
