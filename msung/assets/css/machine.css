@@ -45,3 +45,6 @@ a {
   font-size: 2rem;
   font-family: 'Uni553', sans-serif;
 }
+ul {
+  list-style-type: none;
+}
