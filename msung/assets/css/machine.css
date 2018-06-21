@@ -48,3 +48,6 @@ a {
 ul {
   list-style-type: none;
 }
+hr {
+  border-bottom: 1px dashed #777;
+}
