@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Kenny Shen: Odroid XU4</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link href="../assets/css/milligram.min.css" rel="stylesheet">
+    <link href="../assets/css/machine.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <h1>Kenny Shen</h1>
+          <h2>Odroid XU4</h2>
+          <h3>A CTF station</h3>
+          <section>
+            <p>After setting up a <a href="raspberry-pi.html">Raspberry Pi as a streaming source</a> for my analog audio system, and seeing the Odroid HC1 perform well as a CDN for Commons.host, I started thinking about getting another SBC that would run Kali for playing CTF. The <a href="https://magazine.odroid.com/odroid-xu4">Odroid XU4</a> looked like it would handle the job well with a nice 2GB RAM and octa core CPUs - at a tiny $59.</p>
+            <p><img src="../assets/images/xu4-out-of-box.jpg"></p>
+            <p>Flashing Kali on was straightforward, though handling an eMMC for the first time I felt I had to be extra gentle with all the tiny little pins. After that it was simply snap in, close the case and screw it tight.</p>
+            <p><img src="../assets/images/xu4-flashing-emmc.jpg"></p>
+            <p>Some might point out that the lack of a WiFi module makes the Pi a better option, but in this case it wasn't a big deal - I had an Alfa WiFi adapter lying around so I could put the box anywhere in the house that was convenient.</p>
+            <p><img src="../assets/images/xu4-wifi.jpg"></p>
+            <p>So far it's working without any hitches, so props to the folks at HardKernel for making computing affordable and Offensive Security for maintaining a XU-3/4 friendly version of Kali. I remember when machines were pricey beasts, now it's merely $100 to get a working setup - we live in good times.</p>
+            <p>I love it that I retain the productivity of NixOS on my main machine at home but whenever I want to play script kiddie at CTF challenges I just SSH into the XU4, load up a <span class="tilda">screen</span> session and go at it! On a side note, did you know <span class="tilda">dirbuster</span> can be run headless?</p>
+            <p><pre><code>
+$ dirbuster -l /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -H -u 'http://10.10.10.91:5000/'
+Starting OWASP DirBuster 1.0-RC1 in headless mode
+Starting dir/file list based brute forcing
+...
+            </code></pre></p>
+          </section>
+          <a href="/" class="arrow">&lt;&lt; back</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <footer>All rights reserved 2014 - 2018.</footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

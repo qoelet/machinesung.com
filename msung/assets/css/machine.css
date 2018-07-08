@@ -8,33 +8,46 @@
 body {
   margin: 2rem;
   background: #f8f8f8;
-  font-size: 16px;
+  font-size: 20px;
   font-family: 'Open Sans', sans-serif;
 }
 h1 {
-  font-size: 4rem;
+  font-size: 6rem;
   font-family: 'Uni553', sans-serif;
   color: #ccc;
   text-transform: lowercase;
+  font-smooth: never;
+  -webkit-font-smoothing : none;
 }
 h2 {
-  font-size: 2.5rem;
+  font-size: 5rem;
   font-family: 'Uni553', sans-serif;
   color: #555;
   text-transform: lowercase;
+  font-smooth: never;
+  -webkit-font-smoothing : none;
 }
 h3 {
-  font-size: 2rem;
+  font-size: 4rem;
   font-family: 'Uni553', sans-serif;
   color: #777;
   text-transform: lowercase;
+  font-smooth: never;
+  -webkit-font-smoothing : none;
 }
 footer {
-  font-size: 1rem;
+  font-size: 2rem;
   margin-top: 2rem;
 }
 a {
   color: #2243a0ad;
+  text-decoration: underline;
+}
+ul {
+  list-style-type: none;
+}
+hr {
+  border-bottom: 1px dashed #CCC;
 }
 .svg-icon {
   width: 40px;
@@ -45,9 +58,8 @@ a {
   font-size: 2rem;
   font-family: 'Uni553', sans-serif;
 }
-ul {
-  list-style-type: none;
-}
-hr {
-  border-bottom: 1px dashed #777;
+.tilda {
+  background: #EEE;
+  color: #BA3F64;
+  font-family: monospace;
 }
