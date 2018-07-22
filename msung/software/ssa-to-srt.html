@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Kenny Shen: SSA to SRT conversion tool</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link href="../assets/css/milligram.min.css" rel="stylesheet">
+    <link href="../assets/css/machine.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <h1>Kenny Shen</h1>
+          <h2>SSA to SRT: A conversion tool</h2>
+          <section>
+            <p>Playing movies off a USB stick on the PS4 should be easy, except that when I did tried to do so recently, it wasn't. Besides the whole hassle of which formats are OK with the media player, there's the issue of subtitles. Turns out the easiest way was to just have some <span class="tilda">foo.mp4</span> and <span class="tilda">foo.srt</span> in a folder on the USB stick.</p>
+            <p>But a few of the movies I had came with the subs in SSA format, and so I thought, why not write a conversion tool in a language that I've been meaning to learn - namely C. After 2 hours of reading some tutorials and seeing endless <span class="tilda">Segmentation fault</span> errors, I managed to get a somewhat workable version going.</p>
+            <p><pre><code>
+$ gcc run.c ssa-to-srt.c -o run; ./run foo.ssa
+
+#...
+628
+00:36:02,160 --> 0:36:03,370
+Of course! Any time.
+
+629
+00:36:03,450 --> 0:36:04,950
+-Thank you.
+-Any time.
+            </code></pre></p>
+            <p>There's a fair bit more to do, but I'm taking my time with this as I slowly inch my way through the K&amp;R book. <br><a href="https://github.com/qoelet/ssa-to-srt">Repo @ Github</a></p>
+          </section>
+          <a href="/" class="arrow">&lt;&lt; back</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <footer>All rights reserved 2014 - 2018. Powered by <a href="https://commons.host" target="_blank">Commons.host</a></footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
