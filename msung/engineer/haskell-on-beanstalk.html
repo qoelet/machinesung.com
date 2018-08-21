@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Kenny Shen: Deploying a Haskell application</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link href="../assets/css/milligram.min.css" rel="stylesheet">
+    <link href="../assets/css/machine.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <h1>Kenny Shen</h1>
+          <h2>Deploying a Haskell application</h2>
+          <h3>A simple deployment workflow with CircleCI and AWS Beanstalk</h3>
+          <section>
+            <p>For a while now, I was accustomed to deploying Haskell applications by building them in a CI like CircleCI or TravisCI, then copying the resulting binaries compressed (via <a href="https://upx.github.io/" target="_blank">UPX</a>) to S3, which were then copied over to the target servers via Ansible - a very nice and simple strategy we employed back when I worked at Zalora.</p>
+            <p>At Anapi, I have some applications that we were deploying as microservices, and I didn't really want to burn up time with deployments, so we decided to run these apps on AWS Beanstalk, which allowed for some nice features like autoscaling and relieving me of tasks like managing the load balancing etc. The workflow I configured in CircleCI is pretty simple:</p>
+            <p>
+              <ol>
+                <li>Run the usual build &amp; test on push to Github</li>
+                <li>If the build succeeds, then check if we are on a targeted branch, such as <span class="tilda">staging</span></li>
+                <li>If we are, then execute an additional workflow that builds the app via Docker and gets pushed to AWS ECR</li>
+                <li>Reload the Beanstalk environment</li>
+              </ol>
+              Here's an snippet from my <span class="tilda">.circleci/config.yml</span>:
+            </p>
+            <p><pre><code>
+version: 2
+jobs:
+  build:
+    # .. build and test instructions here
+  deploy_staging:
+    # ...
+    docker:
+      - image: kenny/foo:latest
+    steps:
+      - checkout
+      - run: stack setup
+      - run: stack install --local-bin-path .
+      - setup_remote_docker
+      - run: eval $(aws ecr get-login --region ap-southeast-1 --no-include-email)
+      - run: docker build --rm=false -t foo.dkr.ecr.ap-southeast-1.amazonaws.com/kenny/foo:$CIRCLE_SHA1 -f Dockerfile .
+      - run: docker push foo.dkr.ecr.ap-southeast-1.amazonaws.com/kenny/foo:$CIRCLE_SHA1
+      - run: aws/staging.sh $CIRCLE_SHA1
+workflows:
+  version: 2
+  pipeline:
+    jobs:
+      - build
+      - deploy_staging:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - staging
+              </code></pre></p>
+              <p>For the Docker images I tend to start with a very minimal distro and maintain seperate images for CI and Beanstalk. The only caveat is that reloading the application environments take a bit longer compared to the "S3 copy and deploy via Ansible" route, but it's a tradeoff I can live with.</p>
+          </section>
+          <a href="/" class="arrow">&lt;&lt; back</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <footer>All rights reserved 2014 - 2018.</footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

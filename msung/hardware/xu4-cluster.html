@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Kenny Shen: Odroid XU4 Beowulf cluster</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link href="../assets/css/milligram.min.css" rel="stylesheet">
+    <link href="../assets/css/machine.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <h1>Kenny Shen</h1>
+          <h2>Odroid XU4 Beowulf cluster</h2>
+          <h3>A workstation experiment</h3>
+          <section>
+            <p>After playing/working with <a href="/hardware/odroid-xu4.html">my Odroid XU4</a> for a month and realizing that it was capable of being a serious workstation, I started thinking about getting a few more and making a <a href="https://en.wikipedia.org/wiki/Beowulf_cluster" target="_blank">Beowulf cluster</a> workstation at the office.</p>
+            <p><img src="../assets/images/xu4-beowulf-cluster.jpg"></p>
+            <p>The setup was fairly simple:<br />
+              <ol>
+                <li>I got 4 XU4s and a gigabit switch</li>
+                <li>All of them were given an eMMC that was flashed with Ubuntu</li>
+                <li>One of the XU4s served as <em>master</em> (router, DNS, delegate work)</li>
+                <li>The remainder served as <em>supporting nodes</em> (assigned static IP and a hostname etc)</li>
+                <li>Setup the necessary rules with <span class="tilda">ufw</span></li>
+                <li>Reboot all machines and we are ready to go!</li>
+              </ol>
+            </p>
+            <p>To start, I tackled the issue of propogating changes across the machines with <a href="http://www.fabfile.org/" target="_blank">Fabric</a>, a nice Python library that allows execute of commands via SSH. For example, a simple healthcheck script:</p>
+            <p><pre><code>
+from fabric import Connection
+from paramiko.ssh_exception import NoValidConnectionsError
+
+NODES = (
+    "10.10.10.2",
+    "10.10.10.3",
+    "10.10.10.4",
+    )
+
+for node in NODES:
+    try:
+        result = Connection(node).run("cat /etc/hostname", hide=True)
+        msg = "Ran {0.command!r} on {0.connection.host}, got:{0.stdout}"
+        print(msg.format(result))
+    except NoValidConnectionsError:
+        print("{} is down".format(node))
+            </code></pre></p>
+            <p>I also tested out <a href="https://www.mpich.org/" target="_blank">MPICH</a>, which worked flawlessly:</p>
+            <p><pre><code>
+$ mpiexec -f ~/nodes -n 6 ./cpi
+
+Process 5 of 6 is on san
+Process 0 of 6 is on ichi
+Process 3 of 6 is on ni
+Process 1 of 6 is on ichi
+Process 4 of 6 is on ni
+Process 2 of 6 is on ni
+pi is approximately 3.1415926544231243, Error is 0.0000000008333312
+wall clock time = 0.006851
+            </code></pre></p>
+            <p>There's still a lot more that I want to test on this rig once I get time, such as <a href="https://pypi.org/project/mpi4py/" target="_blank">mpi4py</a>, running a Kubenetes cluster... I'll post back when I do.</p>
+          </section>
+          <a href="/" class="arrow">&lt;&lt; back</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <footer>All rights reserved 2014 - 2018.</footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
