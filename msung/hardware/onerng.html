@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Kenny Shen: OneRNG</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link href="../assets/css/milligram.min.css" rel="stylesheet">
+    <link href="../assets/css/machine.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <h1>Kenny Shen</h1>
+          <h2>OneRNG</h2>
+          <h3>An Open Source entropy generator</h3>
+          <section>
+            <p>I probably don't need this, but reading about the <a href="http://onerng.info/" target="_blank">OneRNG</a> project made me curious enough to buy one. This is almost plug and go, with the firmware already preprogrammed on arrival. You can verify this via a given host software, which installs some udev rules and a Python script for verification. Unfortunately, most of it assumes a vanilla Linux (installing stuff to <span class="tilda">/sbin</span>, etc) and I decided to bypass that and just issue direct serial commands to the
+            device; after that I simply ran <span class="tilda">rngd</span> in the background, disabling DRNG so I can be sure I'm feeding my system from the OneRNG:</p>
+            <p><pre><code>
+$ rngd -r /dev/ttyACM1 -p /var/lock/rngd.ttyACM1 -d 1
+            </code></pre></p>
+            <p>
+              Here's a clip of the LED on the OneRNG dimming as I deplete the entropy pool:<br>
+              <img src="../assets/images/onerng.gif">
+            </p>
+          </section>
+          <a href="/" class="arrow">&lt;&lt; back</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <footer>All rights reserved 2014 - 2018.</footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
