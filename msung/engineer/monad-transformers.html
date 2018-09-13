@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Kenny Shen: Monad transformers</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link href="../assets/css/milligram.min.css" rel="stylesheet">
+    <link href="../assets/css/machine.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <section>
+            <h1>Kenny Shen</h1>
+            <h2>Monad transformers</h2>
+            <h3>A short introduction to exception handling</h3>
+          </section>
+          <article>
+            <p>Taking a simple app that returns a webpage as an example, it's fairly common to add requirements and have some function soon look like the following:</p>
+            <p><pre><code>
+myApp :: Request -> IO Response
+myAPp req = do
+  foo <- action1
+  case foo of
+    Just bar -> do
+      baz <- action2
+      case baz of
+        Right qux -> do
+          -- ... etc
+        Left err -> ...
+    _ -> ...
+            </code></pre></p>
+            <p>When I first started writing Haskell, I never really "felt" it was an issue - there's clarity in simple pattern matching and it appealed to my imperative habits to read something like the above from top to bottom aloud, reasoning about the expected behavior of the program. If it type checks and compile, I guess I'm good.</p>
+            <p>But as I started to write longer programs in the IO monad, this started to get out of hand quickly as the nesting started a nice descend to the right. I had heard monad transformers would be a nice solution, and I had used <span class="tilda">MaybeT</span> once or twice to get some nice terse expressions going. So where do I begin? </p>
+            <p>Most of my pattern matching were on values expressed in the `Maybe` or `Either`, and represented exception signaling when they were `Nothing` or `Left`, for example:</p>
+            <p><pre><code>
+myApp req = do
+  foo <- checkThatWeHaveADatabaseResult :: IO (Either String Result)
+  case foo of
+    Right r -> do
+      ... -- do something with Result
+      bar <- fetchSomethingElseFromDatabase :: IO (Maybe [Baz])
+      case bar of
+        Just xs -> ...
+        _ -> ...
+    Left err -> ... -- do something with message (log it, return some error page)
+            </code></pre></p>
+            <p>The <a href="http://hackage.haskell.org/package/mtl-2.2.2/docs/Control-Monad-Except.html" target="_blank">mtl</a> package defines <span class="tilda">ExceptT</span>, which we can use to add error handling to the IO (or any other) monad. I often run application handlers within the Reader monad, so this plays nicely towards the term "stack" that one might have come across in certain discussions. So we can now redefine the example as follows:</p>
+            <p><pre><code>
+data MyException
+  = UnableToGetResult
+  | NothingOfThatSort
+
+getResultOrFail :: ExceptT MyException IO Result
+getResultOrFail = do
+  res <- lift checkThatWeHaveADatabaseResult
+  case res of
+    Right r -> return r
+    Left _ -> throwE UnableToGetResult
+
+getSomethingOrFail :: ExceptT MyException IO [Baz]
+getSomethingOrFail = do
+  res <- lift fetchSomethingElseFromDatabase
+  case res of
+    Just xs -> return xs
+    Nothing -> throwE NothingOfThatSort
+
+-- pattern match on exceptions, return appropriate response to user
+databaseFailureHandler UnableToGetResult = return $ errorRes status502 "Oops!"
+databaseFailureHandler NothingOfThatSort = return $ errorRes status404 "Nope"
+
+myApp req = do
+  foo <- getResultOrFail
+  ... -- do something with Result
+  bar <- fetchSomethingElseFromDatabase :: IO (Maybe [Baz])
+  ... -- do sometihg with [Baz]
+            </code></pre></p>
+            <p>That's definitely a lot more readable! While we're also looking at exceptions, I definitely recommend reading <a href="https://wiki.haskell.org/Error_vs._Exception" target="_blank">Error vs Exception (Haskell Wiki)</a>.</p>
+          </article>
+          <a href="/" class="arrow">&lt;&lt; back</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <footer>All rights reserved 2014 - 2018.</footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
