@@ -74,7 +74,7 @@ myApp req = do
   foo <- getResultOrFail
   ... -- do something with Result
   bar <- fetchSomethingElseFromDatabase :: IO (Maybe [Baz])
-  ... -- do sometihg with [Baz]
+  ... -- do something with [Baz]
             </code></pre></p>
             <p>That's definitely a lot more readable! While we're also looking at exceptions, I definitely recommend reading <a href="https://wiki.haskell.org/Error_vs._Exception" target="_blank">Error vs Exception (Haskell Wiki)</a>.</p>
           </article>
