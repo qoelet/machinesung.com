@@ -63,3 +63,7 @@ hr {
   color: #BA3F64;
   font-family: monospace;
 }
+.caption {
+  font-style: italic;
+  font-size: 1.5rem;
+}

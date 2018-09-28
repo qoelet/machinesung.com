@@ -21,6 +21,10 @@
               <li>Try and hack a PoC in Node (having no modern knowledge of JS)</li>
               <li>Read through an <a href="https://datatracker.ietf.org/doc/draft-ietf-doh-dns-over-https/">IETF draft</a></li>
             </ol>
+            <p>
+              <img src="../assets/images/dns-scribbles.png"><br>
+              <span class="caption">Scribbling notes down about DNS.</span>
+            </p>
             <p>I wasn't sure how far I would go but actually did managed a working server in Node after an evening, along with toying with Knot DNS on my local machine to test lookups on. Making my way through the IETF draft was also not as scary as it appeared on the onset - on the contrary, it was great fun to stop after some paragraphs and think about why some feature X was proposed and if there would have been any other alternatives that would work as well.</p>
             <p>I can definitely see DOH being a great way to address many unpleasantries we face today: privacy, ISPs poisoning the DNS, ad-blocking and more. In fact, <a href="https://www.troyhunt.com/mmm-pi-hole/">Troy Hunt wrote recently about running his own on a Raspberry Pi</a>. I'm more keen for when we roll this out on the existing Commons infrastructure and set my Firefox to it.</p>
             <p><a href="https://twitter.com/sebdeckers">Sebastiaan</a> has since shaped my crude PoC into a polished middleware on NPM; you can find the repo <a href="https://github.com/qoelet/playdoh">here on Github</a></p>
