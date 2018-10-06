@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Kenny Shen: Digging into GHC extensions - TypeApplications</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link href="../assets/css/milligram.min.css" rel="stylesheet">
+    <link href="../assets/css/machine.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <section>
+            <h1>Kenny Shen</h1>
+            <h2>Digging into GHC extensions - TypeApplications</h2>
+            <h3>Providing type arguments explicitly</h3>
+          </section>
+          <article>
+            <p>Learning more about type level programming has been something on my list of to dos for a while now, so I decided to start by looking at one of the many GHC extensions required for the job - <span class="tilda">TypeApplications</span>. Let's look at the classic polymorphic function example: <span class="tilda">id</span>, the identity function (I'm loading <span class="tilda">ghci</span> with some additional command line options to display <a href="https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/CoreSynType">Core</a>)</p>
+            <p><pre><code>
+$ ghci
+
+λ> id x = x
+
+==================== Tidy Core ====================
+Result size of Tidy Core
+  = {terms: 18, types: 12, coercions: 0, joins: 0/0}
+
+-- RHS size: {terms: 3, types: 3, coercions: 0, joins: 0/0}
+id :: forall p. p -> p
+id = \ (@ p) (x :: p) -> x
+...
+            </code></pre></p>
+            <p>Here we can see that <span class="tilda">id</span> receives an implicit type variable <span class="tilda">@p</span>, which represents the polymorphic type. With polymorphic function application, GHC deals with most of the unification process without the programmer needing to get involved. There are however, many examples of ambiguity; usually these are resolved with type annotations, but they can grow gnarly. In many Haskell libraries, you may have seen the following workaround: prior to GHC 8, controlling type variable instantiation meant using the <span class="tilda">Proxy</span> type, which is a type that holds no data but is used to provide type information:</p>
+            <p><pre><code>
+module NoTypeApp where
+
+import Data.Proxy
+
+data Foo = Foo
+  deriving (Read, Show)
+
+data Bar = Bar
+  deriving (Read, Show)
+
+foo :: String -> String
+foo x = show ((read :: String -> Foo) x)
+
+polyReadThenShow
+  :: forall a . (Show a, Read a)
+  => Proxy a
+  -> String -> String
+polyReadThenShow _ x = show ((read :: String -> a) x)
+
+foo' :: String -> String
+foo' = polyReadThenShow (Proxy :: Proxy Foo)
+
+bar :: String -> String
+bar = polyReadThenShow (Proxy :: Proxy Bar)
+            </code></pre></p>
+            <p>An obvious application of the <span class="tilda">TypeApplications</span> extension is that we can rewrite the above without the need for phantom typing:</p>
+            <p><pre><code>
+{-# LANGUAGE AllowAmbiguousTypes #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TypeApplications #-}
+
+module HasTypeApp where
+
+data Foo = Foo
+  deriving (Read, Show)
+
+data Bar = Bar
+  deriving (Read, Show)
+
+polyReadThenShow
+  :: forall a . (Show a, Read a)
+  => String -> String
+polyReadThenShow = show . read @a
+
+foo :: String -> String
+foo = polyReadThenShow @Foo
+
+bar :: String -> String
+bar = polyReadThenShow @Bar
+            </code></pre></p>
+            <p>This is of course, a rather trivial/dumb use; this would be more useful in scenarios like resolving ambiguity in type classes or type families. But while we're at it, here's another dumb example that demonstrates a trivial case of type ambiguity:</p>
+            <p><pre><code>
+-- adding on to the earlier example
+class Qux a b where
+  qux :: String
+
+instance Qux Foo Bar where
+  qux = "foo"
+
+-- in ghci
+λ> qux
+<interactive>:28:1: error:
+    * Ambiguous type variables `a0', `b0' arising from a use of `qux'
+      prevents the constraint `(Qux a0 b0)' from being solved.
+      Probable fix: use a type annotation to specify what `a0',
+                                                          `b0' should be.
+      These potential instance exist:
+        instance [safe] Qux Foo Bar -- Defined at src/HasTypeApp.hs:29:10
+    * In the expression: qux
+      In an equation for `it': it = qux
+
+λ> qux @Foo @Bar
+"foo"
+            </code></pre></p>
+            <p>If this interests you, you should check out the paper <a href="https://www.seas.upenn.edu/~sweirich/papers/type-app-extended.pdf">Visible Type Applications (Extended version)</a>.
+            </p>
+          </article>
+          <a href="/" class="arrow">&lt;&lt; back</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <footer>All rights reserved 2014 - 2018.</footer>
+        </div>
+      </div>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+  </body>
+</html>
