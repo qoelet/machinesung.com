@@ -72,6 +72,14 @@ chooseMeal _ = error "Fail to parse input"
 mealFromOpt :: [String] -> Meal
 mealFromOpt s = to @Meal (chooseMeal s)
             </code></pre></p>
+            <p>And we convert back to a list of strings. Here, <span class="tilda">SOP I (Code Meal) &cong; datatype Meal</span> and we can switch this into a homogeneous structure (a list of strings) with the constant functor `K` (<span class="tilda">SOP (K String) (Code Meal) &cong; [String]</span>)</p>
+            <p><pre><code>
+hmeal :: Rep Meal
+hmeal = SOP (Z (I Bread :* I Soda :* Nil))
+
+printMeal :: Rep Meal -> [String]
+printMeal = hcollapse . hcmap (Proxy :: Proxy Show) (mapIK show)
+            </code></pre></p>
 						<p>In <span class="tilda">ghci</span>,</p>
             <p><pre><code>
 λ> mealFromList ["Rice", "Soda"]
@@ -80,6 +88,8 @@ Upsize Rice Soda
 Normal Bread
 λ> mealFromList []
 Diet
+λ> printMeal hmeal
+["Bread","Soda"]
             </code></pre></p>
 						<p>That was fun! The library is pretty huge - there are some examples there but I suspect I'll need to take some time to mow down the concepts.</p>
           </article>
