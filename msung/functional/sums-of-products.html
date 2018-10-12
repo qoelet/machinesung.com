@@ -90,6 +90,12 @@ Normal Bread
 Diet
 λ> printMeal hmeal
 ["Bread","Soda"]
+
+-- back and forth
+λ> printMeal . chooseMeal $ ["Bread"]
+["Bread"]
+λ> mealFromList . printMeal . from $ Normal Bread
+Normal Bread
             </code></pre></p>
 						<p>That was fun! The library is pretty huge - there are some examples there but I suspect I'll need to take some time to mow down the concepts.</p>
           </article>
