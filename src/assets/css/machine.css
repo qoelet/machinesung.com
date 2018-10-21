@@ -1,0 +1,69 @@
+@font-face{
+  font-family: 'Uni553';
+  src: url('../fonts/uni0553-webfont.eot');
+  src: url('../fonts/uni0553-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/uni0553-webfont.woff') format('woff'),
+       url('../fonts/uni0553-webfont.ttf') format('truetype');
+}
+body {
+  margin: 2rem;
+  background: #f8f8f8;
+  font-size: 20px;
+  font-family: 'Open Sans', sans-serif;
+}
+h1 {
+  font-size: 6rem;
+  font-family: 'Uni553', sans-serif;
+  color: #ccc;
+  text-transform: lowercase;
+  font-smooth: never;
+  -webkit-font-smoothing : none;
+}
+h2 {
+  font-size: 3rem;
+  font-family: 'Uni553', sans-serif;
+  color: #555;
+  text-transform: lowercase;
+  font-smooth: never;
+  -webkit-font-smoothing : none;
+}
+h3 {
+  font-size: 2rem;
+  font-family: 'Uni553', sans-serif;
+  color: #777;
+  text-transform: lowercase;
+  font-smooth: never;
+  -webkit-font-smoothing : none;
+}
+footer {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+a {
+  color: #2243a0ad;
+  text-decoration: underline;
+}
+ul {
+  list-style-type: none;
+}
+hr {
+  border-bottom: 1px dashed #CCC;
+}
+.svg-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+.arrow {
+  font-size: 2rem;
+  font-family: 'Uni553', sans-serif;
+}
+.tilda {
+  background: #EEE;
+  color: #BA3F64;
+  font-family: monospace;
+}
+.caption {
+  font-style: italic;
+  font-size: 1.5rem;
+}
