@@ -5,6 +5,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
     <link href="/assets/css/milligram.min.css" rel="stylesheet">
+    <link href="/assets/css/ascetic.css" rel="stylesheet">
     <link href="/assets/css/machine.css" rel="stylesheet">
   </head>
   <body>
@@ -16,5 +17,7 @@
         </div>
       </div>
     </div>
+    <script src="/assets/js/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad()</script>
   </body>
 </html>

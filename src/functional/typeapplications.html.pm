@@ -4,7 +4,7 @@
 ◊h2{Providing type arguments explicitly}
 ◊m-article{
   ◊p{Learning more about type level programming has been something on my list of to dos for a while now, so I decided to start by looking at one of the many GHC extensions required for the job - ◊span[#:class "tilda"]{TypeApplications}. Let's look at the classic polymorphic function example: ◊span[#:class "tilda"]{id}, the identity function (I'm loading ◊span[#:class "tilda"]{ghci} with some additional command line options to display ◊a[#:href "https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/CoreSynType"]{Core})}
-  ◊m-code{
+  ◊m-code-shell{
 $ ghci
 
 ◊string->symbol{lambda}> id x = x
@@ -19,7 +19,7 @@ id = \ (@ p) (x :: p) -> x
 ...
   }
   ◊p{Here we can see that ◊span[#:class "tilda"]{id} receives an implicit type variable ◊span[#:class "tilda"]{@p}, which represents the polymorphic type. With polymorphic function application, GHC deals with most of the unification process without the programmer needing to get involved. There are however, many examples of ambiguity; usually these are resolved with type annotations, but they can grow gnarly. In many Haskell libraries, you may have seen the following workaround: prior to GHC 8, controlling type variable instantiation meant using the ◊span[#:class "tilda"]{Proxy} type, which is a type that holds no data but is used to provide type information:}
-  ◊m-code{
+  ◊m-code-haskell{
 module NoTypeApp where
 
 import Data.Proxy
@@ -46,7 +46,7 @@ bar :: String -> String
 bar = polyReadThenShow (Proxy :: Proxy Bar)
   }
   ◊p{An obvious application of the ◊span[#:class "tilda"]{TypeApplications} extension is that we can rewrite the above without the need for phantom typing:}
-  ◊m-code{
+  ◊m-code-haskell{
 {-# LANGUAGE AllowAmbiguousTypes #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TypeApplications #-}
@@ -71,13 +71,13 @@ bar :: String -> String
 bar = polyReadThenShow @Bar
   }
   ◊p{This is of course, a rather trivial/dumb use; this would be more useful in scenarios like resolving ambiguity in type classes or type families. But while we're at it, here's another dumb example that demonstrates a trivial case of type ambiguity:}
-  ◊m-code{
+  ◊m-code-shell{
 -- adding on to the earlier example
-class Qux a b where
-  qux :: String
+-- class Qux a b where
+--   qux :: String
 
-instance Qux Foo Bar where
-  qux = "foo"
+-- instance Qux Foo Bar where
+--   qux = "foo"
 
 -- in ghci
 ◊string->symbol{lambda}> qux

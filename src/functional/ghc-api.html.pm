@@ -5,7 +5,7 @@
 ◊m-article{
   ◊p{◊em{writing in progress, this is part of my curiosity towards the GHC API, check back later.}}
   ◊p{The general idea of modifying a given source file}
-  ◊m-code{
+  ◊m-code-haskell{
 modifyImports :: FilePath -> ByteString -> TcGblEnv -> IO ()
 modifyImports modulePath fileContents tcEnv =
   ...
@@ -32,7 +32,7 @@ modifyImports modulePath fileContents tcEnv =
       print (exactPrint ast' anns')
   }
   ◊p{Running the above as a source plugin... (modified the actual output for readability)}
-  ◊m-code{
+  ◊m-code-shell{
 [1 of 1] Compiling Main             ( Main.hs, Main.o ) [Plugin forced recompilation]
 Original source:
   module Main where

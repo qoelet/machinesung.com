@@ -13,7 +13,7 @@
     ◊li{Reload the Beanstalk environment}
     Here's an snippet from my ◊span[#:class "tilda"]{.circleci/config.yml}:
   }}
-  ◊m-code{
+  ◊m-code-yaml{
 version: 2
 jobs:
   build:
