@@ -10,14 +10,16 @@
     <link href="/assets/css/machine.css" rel="stylesheet">
   </head>
   <body>
-    <div class="container">
-      ◊(->html doc)
-      <div class="columns">
-        <div class="column">
-          <footer>All rights reserved 2014 - 2018. Rendered using <a href="https://docs.racket-lang.org/pollen/">Pollen</a>, enabled by <a href="https://commons.host">Commons.host</a></footer>
+    <section class="section">
+      <div class="container">
+        ◊(->html doc)
+        <div class="columns">
+          <div class="column">
+            <footer>All rights reserved 2014 - 2018. Rendered using <a href="https://docs.racket-lang.org/pollen/">Pollen</a>, enabled by <a href="https://commons.host">Commons.host</a></footer>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
     <script src="/assets/js/highlight.js"></script>
     <script>hljs.initHighlightingOnLoad()</script>
   </body>
