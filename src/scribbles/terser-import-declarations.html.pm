@@ -64,9 +64,9 @@ True
     runParser modulePath fileContents >>= \case
       Left () -> pure ()
       Right (anns, ast) -> do
-      let canMergeList = mergeableImports user_imports all_imports
-      (anns', ast') <- foldM rewriteImport (anns, ast) canMergeList
-      print (exactPrint ast', anns')
+        let canMergeList = mergeableImports user_imports all_imports
+        (anns', ast') <- foldM rewriteImport (anns, ast) canMergeList
+        print (exactPrint ast', anns')
   }
   ◊m-code-shell{
 [1 of 1] Compiling Main             ( Main.hs, Main.o ) [Plugin forced recompilation]
