@@ -58,9 +58,24 @@ True
     Partial (keep, rewrites) -> do
       ...
   }
+  ◊p{Let's also define some helper functions to help with transforming the AST:}
+  ◊m-code-haskell{
+  mkIEVarFromName :: Monad m => Name -> TransformT m (Located (IE GhcPs))
+  mkIEVarFromName name = do
+    loc <- uniqueSrcSpanT
+    return $ L loc (IEVar noExt (L loc (IEName
+      (L loc (mkVarUnqual ((occNameFS . occName) name))))))
+
+  addImportDeclAnn :: Monad m => Located (IE GhcPs) -> TransformT m ()
+  addImportDeclAnn (L _ (IEVar _ (L _ (IEName x))))
+    = addSimpleAnnT x
+      (DP (0, 0))
+      [ (G AnnVal, DP (0, 0)) ]
+  }
   ◊p{Within source plugins, we can play out the entire story from the given ◊code{TcGblEnv}:}
   ◊m-code-haskell{
-  testMergeImportDecls _ _ tcEnv = do
+  testMergeImportDecls _ modSummary tcEnv = do
+    ...
     runParser modulePath fileContents >>= \case
       Left () -> pure ()
       Right (anns, ast) -> do
