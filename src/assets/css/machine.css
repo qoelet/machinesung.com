@@ -21,7 +21,7 @@ h1 {
   -webkit-font-smoothing : none;
 }
 h2 {
-  font-size: 3rem;
+  font-size: 2rem;
   font-family: 'Uni553', sans-serif;
   color: #555;
   text-transform: lowercase;
@@ -29,7 +29,7 @@ h2 {
   -webkit-font-smoothing : none;
 }
 h3 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-family: 'Uni553', sans-serif;
   color: #777;
   text-transform: lowercase;

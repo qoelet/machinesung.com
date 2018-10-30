@@ -15,7 +15,7 @@
         ◊(->html doc)
         <div class="columns">
           <div class="column">
-            <footer>All rights reserved 2014 - 2018. Rendered using <a href="https://docs.racket-lang.org/pollen/">Pollen</a>, enabled by <a href="https://commons.host">Commons.host</a></footer>
+            <footer>All rights reserved 2014 - 2018. Rendered using <a href="https://docs.racket-lang.org/pollen/">Pollen</a> and <a href="https://bulma.io">Bulma</a>, enabled by <a href="https://commons.host">Commons.host</a></footer>
           </div>
         </div>
       </div>
