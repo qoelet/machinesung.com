@@ -49,7 +49,7 @@ True
 
   rewriteImport
     :: (Anns, Located (HsModule GhcPs))
-    -> Mergeable (Set.Set Name)
+    -> CanMerge (Set.Set Name)
     -> IO (Anns, Located (HsModule GhcPs))
   rewriteImport (anns, ast) = \case
     No -> return (anns, ast)
