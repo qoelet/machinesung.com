@@ -32,7 +32,7 @@ myApp req = do
         _ -> ...
     Left err -> ... -- do something with message (log it, return some error page)
   }
-  ◊p{The ◊a[#:href "http://hackage.haskell.org/package/transformers"]{transformers} package defines ◊span[#:class "tilda"]{ExceptT}, which we can use to add error handling to the IO (or any other) monad. I often run application handlers within the Reader monad, so this plays nicely towards the term "stack" that one might have come across in certain discussions. So we can now redefine the example as follows:}
+  ◊p{The ◊a[#:href "http://hackage.haskell.org/package/transformers"]{transformers} package defines ◊code{ExceptT}, which we can use to add error handling to the IO (or any other) monad. I often run application handlers within the Reader monad, so this plays nicely towards the term "stack" that one might have come across in certain discussions. So we can now redefine the example as follows:}
   ◊m-code-haskell{
 data MyException
   = UnableToGetResult

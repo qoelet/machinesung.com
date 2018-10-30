@@ -7,11 +7,11 @@
   ◊p{At Anapi, I have some applications that we were deploying as microservices, and I didn't really want to burn up time with deployments, so we decided to run these apps on AWS Beanstalk, which allowed for some nice features like autoscaling and relieving me of tasks like managing the load balancing etc. The workflow I configured in CircleCI is pretty simple:}
   ◊p{◊ol{
     ◊li{Run the usual build &amp; test on push to Github}
-    ◊li{If the build succeeds, then check if we are on a deployment branch, such as ◊span[#:class "tilda"]{staging}}
+    ◊li{If the build succeeds, then check if we are on a deployment branch, such as ◊code{staging}}
     ◊li{Compress binary and copy to S3 (append a hash and save it via CircleCI's workspaces}
     ◊li{On a deployment workflow step, copy binary from S3, and build app via Docker, push to AWS ECR}
     ◊li{Reload the Beanstalk environment}
-    Here's an snippet from my ◊span[#:class "tilda"]{.circleci/config.yml}:
+    Here's an snippet from my ◊code{.circleci/config.yml}:
   }}
   ◊m-code-yaml{
 version: 2
@@ -62,6 +62,6 @@ workflows:
                 - staging
 }
   ◊p{For the Docker images I tend to start with a very minimal distro and maintain seperate images for CI and Beanstalk. With proper caching strategy, our build times vary between 3-4 mins overall on the build and testing phase, and 1-2 minutes on the deploy step, which is fairly decent.}
-  ◊p{One thing that bugs me is the CI running into OOM issues whenever a full rebuild is triggered (e.g. bumping Stackage releases), and the workaround is to run it with ◊span[#:class "tilda"]{stack build -j1}, but it also takes around 40 minutes to complete.}
+  ◊p{One thing that bugs me is the CI running into OOM issues whenever a full rebuild is triggered (e.g. bumping Stackage releases), and the workaround is to run it with ◊code{stack build -j1}, but it also takes around 40 minutes to complete.}
 }
 ◊m-back

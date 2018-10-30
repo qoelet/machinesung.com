@@ -3,7 +3,7 @@
 ◊h1{GHC extension - TypeApplications}
 ◊h2{Providing type arguments explicitly}
 ◊m-article{
-  ◊p{Learning more about type level programming has been something on my list of to dos for a while now, so I decided to start by looking at one of the many GHC extensions required for the job - ◊span[#:class "tilda"]{TypeApplications}. Let's look at the classic polymorphic function example: ◊span[#:class "tilda"]{id}, the identity function (I'm loading ◊span[#:class "tilda"]{ghci} with some additional command line options to display ◊a[#:href "https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/CoreSynType"]{Core})}
+  ◊p{Learning more about type level programming has been something on my list of to dos for a while now, so I decided to start by looking at one of the many GHC extensions required for the job - ◊code{TypeApplications}. Let's look at the classic polymorphic function example: ◊code{id}, the identity function (I'm loading ◊code{ghci} with some additional command line options to display ◊a[#:href "https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/CoreSynType"]{Core})}
   ◊m-code-shell{
 $ ghci
 
@@ -18,7 +18,7 @@ id :: forall p. p -> p
 id = \ (@ p) (x :: p) -> x
 ...
   }
-  ◊p{Here we can see that ◊span[#:class "tilda"]{id} receives an implicit type variable ◊span[#:class "tilda"]{@p}, which represents the polymorphic type. With polymorphic function application, GHC deals with most of the unification process without the programmer needing to get involved. There are however, many examples of ambiguity; usually these are resolved with type annotations, but they can grow gnarly. In many Haskell libraries, you may have seen the following workaround: prior to GHC 8, controlling type variable instantiation meant using the ◊span[#:class "tilda"]{Proxy} type, which is a type that holds no data but is used to provide type information:}
+  ◊p{Here we can see that ◊code{id} receives an implicit type variable ◊code{@p}, which represents the polymorphic type. With polymorphic function application, GHC deals with most of the unification process without the programmer needing to get involved. There are however, many examples of ambiguity; usually these are resolved with type annotations, but they can grow gnarly. In many Haskell libraries, you may have seen the following workaround: prior to GHC 8, controlling type variable instantiation meant using the ◊code{Proxy} type, which is a type that holds no data but is used to provide type information:}
   ◊m-code-haskell{
 module NoTypeApp where
 
@@ -45,7 +45,7 @@ foo' = polyReadThenShow (Proxy :: Proxy Foo)
 bar :: String -> String
 bar = polyReadThenShow (Proxy :: Proxy Bar)
   }
-  ◊p{An obvious application of the ◊span[#:class "tilda"]{TypeApplications} extension is that we can rewrite the above without the need for phantom typing:}
+  ◊p{An obvious application of the ◊code{TypeApplications} extension is that we can rewrite the above without the need for phantom typing:}
   ◊m-code-haskell{
 {-# LANGUAGE AllowAmbiguousTypes #-}
 {-# LANGUAGE ScopedTypeVariables #-}

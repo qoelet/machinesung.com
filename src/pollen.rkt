@@ -14,10 +14,10 @@
 
 ; shorthands
 (define (m-row . contents)
-  `(div ((class "row")) (div ((class "column")) ,@contents)))
+  `(div ((class "columns")) (div ((class "column")) ,@contents)))
 
 (define (m-article . contents)
-  `(div ((class "row")) (div ((class "column")) (article ,@contents))))
+  `(div ((class "columns")) (div ((class "column")) (article ,@contents))))
 
 (define (m-code . contents)
   `(pre (code ,@contents)))
@@ -39,10 +39,10 @@
 
 ; tests
 (check-equal? ◊m-row{"foo"}
-  ◊div[#:class "row"]{◊div[#:class "column"]{"foo"}})
+  ◊div[#:class "columns"]{◊div[#:class "column"]{"foo"}})
 
 (check-equal? ◊m-article{"foo"}
-  ◊div[#:class "row"]{◊div[#:class "column"]{◊article{"foo"}}})
+  ◊div[#:class "columns"]{◊div[#:class "column"]{◊article{"foo"}}})
 
 (check-equal? ◊m-code{"foo"}
   ◊pre{◊code{"foo"}})

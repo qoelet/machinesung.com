@@ -3,7 +3,7 @@
 ◊h1{Power sets}
 ◊h2{Deconstruction of a nifty expression}
 ◊m-article{
-  ◊p{I was browsing through the IRC logs on ◊a[#:href "https://wiki.haskell.org/IRC_channel"]{#haskell} when I came upon this expression for defining a power-set: ◊span[#:class "tilda"]{powerset = filterM (const [True, False])}. This piqued my interest, and soon I had a little puzzle on hand. Let's take a look at how this works.}
+  ◊p{I was browsing through the IRC logs on ◊a[#:href "https://wiki.haskell.org/IRC_channel"]{#haskell} when I came upon this expression for defining a power-set: ◊code{powerset = filterM (const [True, False])}. This piqued my interest, and soon I had a little puzzle on hand. Let's take a look at how this works.}
   ◊m-code-shell{
 ◊string->symbol{lambda}> powerset = filterM (const [True, False])
 ◊string->symbol{lambda}> powerset []
@@ -13,7 +13,7 @@
   }
   ◊p{For those of you who don't know what a power set is, it's basically a set that comprises of all the possible subsets of given set. For a given set S, the power set is defined as}
   ◊p{\(P(S) \colon= \text{ T | Set(T), T $\subset$ S} \)}
-  ◊p{including the empty set \(\emptyset\) and S itself. I started with ◊span[#:class "tilda"]{filterM} and drilled downwards from there:}
+  ◊p{including the empty set \(\emptyset\) and S itself. I started with ◊code{filterM} and drilled downwards from there:}
   ◊m-code-haskell{
 filterM :: (Applicative m) => (a -> m Bool) -> [a] -> m [a]
 filterM p
@@ -22,7 +22,7 @@ filterM p
 liftA2 :: (a -> b -> c) -> f a -> f b -> f c
 liftA2 f x = (<*>) (fmap f x)
   }
-  ◊p{◊span[#:class "tilda"]{liftA2} lifts the lambda function ◊span[#:class "tilda"]{\flg -> if flg then (x:) else id} into ◊span[#:class "tilda"]{[True, False]}, which produces a list of functions. If we take a collection of integers as an example, then each call produces the following}
+  ◊p{◊code{liftA2} lifts the lambda function ◊code{\flg -> if flg then (x:) else id} into ◊code{[True, False]}, which produces a list of functions. If we take a collection of integers as an example, then each call produces the following}
   ◊m-code-shell{
 -- As an example, given [1, 2 ,3], calling liftA2 with the first value 1
 -- liftA2 = (<*>) (fmap f x)
