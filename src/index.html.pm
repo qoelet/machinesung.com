@@ -27,6 +27,7 @@
 ◊m-row{
   ◊h2{Others}
   ◊ul{
+    ◊li{◊a[#:href "others/commons.html"]{Commons} ◊sup{Adventures in networking}}
     ◊li{◊a[#:href "others/diy-keyboards.html"]{Keyboards} ◊sup{Adventures in typing}}
     ◊li{◊a[#:href "others/diy-audio.html"]{Shoestring HiFi} ◊sup{Adventures in audio}}
     ◊li{◊a[#:href "others/diy-sbcs.html"]{Single board computers} ◊sup{Adventures in budget computing}}

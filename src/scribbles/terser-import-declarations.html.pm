@@ -1,15 +1,14 @@
 #lang pollen
 
 ◊h1{Terser import declarations}
-◊h2{Generalizing via set operations}
+◊h2{More fun with ghc-exactprint}
 ◊m-article{
-  ◊p{◊em{writing in progress, check back later.}}
   ◊p{I want to see if I can use it to generalize some operations with my prior explorations with the ◊a[#:href "/scribbles/ghc-api.html"]{GHC API}; expressing imported names as sets}
-  ◊p{The task at hand starts with identifying imports declarations we can "compress" ◊string->symbol{mdash} a list of exports from module ◊code{A}, and some adjacent import declaration ◊code{A.B (x)} and determine if ◊code{A (x)} is feasible. We can start by thinking of the possible outcomes in terms of sets:}
+  ◊p{The task at hand starts with identifying imports declarations we can "compress" ◊string->symbol{mdash} a list of exports from module ◊code{A}, and some adjacent import declaration ◊code{A.B (x)} and determine if ◊code{A (x)} is feasible. The possible outcomes can be visualized in terms of sets (and a great excuse for me to flex my LaTeX):}
   ◊figure[#:class "image" #:style "width: 75%; padding: 1rem;"]{
     ◊img[#:src "/assets/images/imports-as-venn-diagrams.png"]{}
   }
-  ◊p{We could start by modeling declarations as a standalone sets, and locate a handful of operations for our aims:}
+  ◊p{We could start by locating a handful of suitable functions to express our intent:}
   ◊m-code-shell{
 ◊string->symbol{lambda}> :m +Data.Set
 ◊string->symbol{lambda}> let mExports = fromList ["foo", "bar", "baz"]
