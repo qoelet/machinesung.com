@@ -46,19 +46,8 @@ True
     = canMerge (getImportNames j) (getExportNames i j)
     : mergeableImports [] all_imports
   ...
-
-  rewriteImport
-    :: (Anns, Located (HsModule GhcPs))
-    -> CanMerge (Set.Set Name)
-    -> IO (Anns, Located (HsModule GhcPs))
-  rewriteImport (anns, ast) = \case
-    No -> return (anns, ast)
-    Full rewrites -> do
-      ...
-    Partial (keep, rewrites) -> do
-      ...
   }
-  ◊p{Let's also define some helper functions to help with transforming the AST:}
+  ◊p{Let's also define some helper functions to help with rewriting the source}
   ◊m-code-haskell{
   mkIEVarFromName :: Monad m => Name -> TransformT m (Located (IE GhcPs))
   mkIEVarFromName name = do
@@ -72,6 +61,35 @@ True
       (DP (0, 0))
       [ (G AnnVal, DP (0, 0)) ]
   }
+  ◊p{We can now attempt to rewrite the import declarations. I also penned down some type synonyms for readability. My first attempt is a bit lengthy, so I'll only show the merge action for the case of a proper adjacent subset:}
+  ◊m-code-haskell{
+type Merges = [CanMerge (Set.Set Name)]
+type Imports = [LImportDecl GhcPs]
+type Rewrite = (Anns, Located (HsModule GhcPs)) -> (Anns, Located (HsModule GhcPs))
+
+rewriteImportDecls :: Merges -> Imports -> Imports -> Rewrite
+rewriteImportDecls
+  (this : next : rest)
+  (i1@(L l1 imp1) : i2@(L l2 imp2) : is)
+  acc (anns, ast)
+  = case this of
+    No -> ...
+    Full mergeDecls -> do
+      let (L astLoc hsMod) = ast
+          (mDecls, _, _) = runTransform anns (mapM mkIEVarFromName (Set.toList mergeDecls))
+          Just (_, L locHiding currentDecls) = ideclHiding imp1
+          imp1' = imp1 { ideclHiding = Just (True, L locHiding (currentDecls ++ mDecls)) }
+          mergeImportDeclsFull (L l1 imp1') = do
+            let hsMod' = hsMod { hsmodImports = acc ++ [L l1 imp1'] ++ is }
+            addTrailingCommaT (last currentDecls)
+            mapM_ addImportDeclAnn mDecls
+            return (L astLoc hsMod')
+          (ast', (anns', _), _) = runTransform anns (mergeImportDeclsFull (L l1 imp1'))
+      if null is
+        then (anns', ast')
+        else rewriteImportDecls rest is (acc ++ [L l1 imp1']) (anns', ast')
+    Partial (keepDecls, mergeDecls) -> ...
+  }
   ◊p{Within source plugins, we can play out the entire story from the given ◊code{TcGblEnv}:}
   ◊m-code-haskell{
   testMergeImportDecls _ modSummary tcEnv = do
@@ -80,7 +98,9 @@ True
       Left () -> pure ()
       Right (anns, ast) -> do
         let canMergeList = mergeableImports user_imports all_imports
-        (anns', ast') <- foldM rewriteImport (anns, ast) canMergeList
+            (L _ hsMod) = ast
+            allImports = hsmodImports hsMod
+            (anns', ast') = rewriteImportDecls canMergeList allImports [] (anns, ast)
         print (exactPrint ast', anns')
   }
   ◊m-code-shell{
@@ -90,18 +110,36 @@ Original source:
 
   module Main where
 
+  import Data.Bool
+  import Numeric (showInt)
+  import System.FilePath (isValid)
+  import System.FilePath.Posix (isAbsolute) -- full merge
   import System.Environment (setEnv)
-  import System.Environment.Blank (getArgs, getEnvDefault)
+  import System.Environment.Blank (getEnvDefault, getArgs) -- partial merge
+  import Data.String
+
+  main :: IO ()
+  main = do
+    putStrLn "main"
+    print (1 + 2)
 
 Modified source:
 
   module Main where
 
+  import Data.Bool
+  import Numeric (showInt)
+  import System.FilePath (isValid,isAbsolute)
   import System.Environment (setEnv,getArgs)
   import System.Environment.Blank (getEnvDefault)
+  import Data.String
+
+  main :: IO ()
+  main = do
+  putStrLn "main"
+  print (1 + 2)
 
 Linking Main ...
   }
-  ◊p{◊em{Note: Still rewriting the actual transforms, but getting close. To be continued... }}
 }
 ◊m-back

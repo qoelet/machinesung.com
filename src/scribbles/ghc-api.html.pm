@@ -45,7 +45,7 @@ Modified source:
 
   import System.FilePath (isValid,isAbsolute)
   }
-  ◊p{Another example, where we remove any trailing commas from import declarations}
+  ◊p{Another example, where we remove any trailing commas from import declarations. This was motivated by another issue from ◊a[#:href "https://github.com/kowainik/smuggler"]{smuggler}:}
   ◊m-code-haskell{
 removeTrailingCommas :: Anns -> Anns
 removeTrailingCommas
