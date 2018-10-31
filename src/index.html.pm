@@ -15,7 +15,7 @@
 ◊m-row{
   ◊h2{scribbles}
   ◊ul{
-    ◊li{◊a[#:href "scribbles/terser-import-declarations.html"]{Terser import declarations} ◊sup{Generalizing via set operations}}
+    ◊li{◊a[#:href "scribbles/terser-import-declarations.html"]{Terser import declarations} ◊sup{More fun with ghc-exactprint}}
     ◊li{◊a[#:href "scribbles/ghc-api.html"]{Source modifications} ◊sup{via GHC API and ghc-exactprint}}
     ◊li{◊a[#:href "scribbles/sums-of-products.html"]{Sums of products (and carbs)} ◊sup{Fun with datatypes and representations}}
     ◊li{◊a[#:href "scribbles/typeapplications.html"]{GHC extension - TypeApplications} ◊sup{Providing type arguments explicitly}}
