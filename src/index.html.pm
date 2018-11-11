@@ -3,13 +3,18 @@
 ◊h1{kenny shen}
 ◊m-row{
   ◊p{I'm a software engineer from Singapore. Right now, I'm working at ◊a[#:href "https://www.anapi.co"]{Anapi}, and logging my miles towards a math major at the ◊a[#:href "https://www.open.ac.uk"]{Open U}.}
-  ◊p{I have been coding in various domains and languages, notably Javascript, Python and Haskell over the last 9 years. Lately, interests of mine lately include type theory, assisted proving and code generation via Coq as well languages like Mercury and Racket.}
-  ◊p{I love being curious and making sense of things and how they fit together. Some of my thoughts and notes are made can be found below.}
+  ◊p{I have been coding in various domains and languages, notably Javascript, Python and Haskell over the last 9 years. I've been focused of late on discovering logic and language oriented programming, and correspondingly, languages like Racket and Mercury.}
+  ◊p{I love being curious and making sense of things and how they fit together. Some of my thoughts, notes and side projects can be found below.}
   ◊p{
-    ◊a[#:href "https://dev.to/commonshost/"]{Dev.to} |
+    Solo
     ◊a[#:href "https://github.com/qoelet"]{Github} |
     ◊a[#:href "https://gitlab.com/qoelet"]{Gitlab} |
     ◊a[#:href "https://www.linkedin.com/in/kenny-shen/"]{LinkedIn}
+  }
+  ◊p{
+    Team
+    ◊a[#:href "https://dev.to/commonshost/"]{Commons/Dev} |
+    ◊a[#:href "https://github.com/kowainik/"]{Kowainik/Github}
   }
 }
 ◊m-row{
