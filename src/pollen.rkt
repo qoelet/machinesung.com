@@ -31,6 +31,15 @@
 (define (m-code-haskell . xs)
 	`(pre (code ((class ,(format "~a" "haskell"))) ,@xs)))
 
+(define (m-code-lisp . xs)
+	`(pre (code ((class ,(format "~a" "lisp"))) ,@xs)))
+
+(define (m-code-mercury . xs)
+	`(pre (code ((class ,(format "~a" "mercury"))) ,@xs)))
+
+(define (m-code-prolog . xs)
+	`(pre (code ((class ,(format "~a" "prolog"))) ,@xs)))
+
 (define (m-code-shell . xs)
 	`(pre (code ((class ,(format "~a" "shell"))) ,@xs)))
 
