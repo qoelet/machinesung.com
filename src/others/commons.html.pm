@@ -10,7 +10,7 @@
   }
   ◊p{
     Meanwhile:
-    ◊a[#:href ""]{Commons.host}
+    ◊a[#:href "https://commons.host"]{Commons.host}
   }
 }
 ◊m-back
