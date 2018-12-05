@@ -3,7 +3,7 @@
 ◊h1{Lisp and AI}
 ◊h2{'(Fun with symbolic manipulation)}
 ◊m-article{
-  ◊p{◊em{writing in progress}}
+  ◊p{◊em{learning/writing in progress}}
   ◊m-code-lisp{
 (car (cdr '(
   Here is a list of symbols
@@ -53,6 +53,19 @@ true.
 ?- order(tea, sugar(less), milk(condensed), temperature(cold), dilution_factor(low)).
 teh gao siudai peng
 true.
+  }
+  ◊p{In AI literature this would be similar to a ◊em{table-driven agent}, or just simply, a lookup table that takes some given input and returns an action. For example, if we want some agent to tell us what to do with some given fruit:}
+  ◊m-code-lisp{
+(defun tda (p)
+  ;; a lookup table
+  (setq tbl (make-hash-table))
+  (setf (gethash 'apple tbl) 'eat)
+  (setf (gethash 'orange tbl) 'squeeze-and-drink)
+
+  ;; map precept to action
+  (cond
+    ((gethash p tbl) (gethash p tbl))
+    (t  'i-cannot-help-you)))
   }
 }
 ◊m-back
