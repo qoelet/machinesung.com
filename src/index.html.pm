@@ -20,6 +20,7 @@
 ◊m-row{
   ◊h2{scribbles}
   ◊ul{
+    ◊li{◊a[#:href "scribbles/racklog.html"]{Racklog} ◊sup{Racket extended with logic programming}}
     ◊li{◊a[#:href "scribbles/land-of-lisps.html"]{Beginning AI} ◊sup{First explorations via Lisp}}
     ◊li{◊a[#:href "scribbles/terser-import-declarations.html"]{Terser import declarations} ◊sup{More fun with ghc-exactprint}}
     ◊li{◊a[#:href "scribbles/ghc-api.html"]{Source modifications} ◊sup{via GHC API and ghc-exactprint}}

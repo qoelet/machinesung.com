@@ -6,10 +6,36 @@
   ◊p{◊em{learning/writing in progress}}
   ◊p{Taking a more concrete look at the entire field of AI has been on my list of things to do this year for a while now; I got my hands on a few really beat up AI textbooks from a thrift store recently and decided to take some time to chow down the material. A lot of them involved examples in Lisp, so it made for a fun "dual" learning of sorts. Having written some Racket and Pollen, the syntax isn't entirely unfamiliar.}
   ◊m-code-lisp{
+; Examples
 (car (cdr '(
   Here is a list of symbols
   constructed from atoms and lists in Lisp.
 )))
+
+(setq room-data
+  '((size large)
+    (temperature cold)
+    (noise quiet)))
+
+(assoc 'size room-data) ; returns large
+
+(defun fetch (k al)
+  (cond
+    ((null (assoc k al)) 'not-found)
+    (t (car (cdr (assoc k al))))))
+
+(fetch 'size room-data) ; returns large
+(fetch 'height room-data) ; returns not-found
+
+; Define data structures without boilerplate
+defstruct house
+ (rooms 0)
+ (doors 1)
+ (is-type 'rental)))
+
+; Now we have free access procedures
+(setq foo-house (make-house))
+(house-rooms foo-house) ; gives default of 0
   }
   ◊p{The ◊a[#:href "https://en.wikipedia.org/wiki/Person-centered_therapy"]{Rogerian 'psychiatrist'}. The following snippet of code from a book I was reading is hilarious - but is truly the roots of what we call AI chatbots these days. It is fun to witness how this works: a collection of facts, pattern matching and some helper functions to switch contexts around can make for an almost bearable conversation - if you're feeling truly bored! Most chatbot implementations don't actually veer far from this - once you start asking very generic questions where there are no matches to their knowledge base then you get a chain of fallback statements like "I do not understand your question - can you rephrase..." and the like.}
   ◊m-code-lisp{
@@ -69,7 +95,6 @@ true.
     (t 'i-cannot-help-you)))
   }
   ◊p{A common first step to making such an agent more reactive or may I say, less helpless, would be to add randomization. With our fruit bot, we could instead make a guess from known actions when it encounters a fruit not in the lookup table,}
-}
   ◊m-code-lisp{
 (defun fruitbot (p)
   ;; ...
@@ -82,4 +107,8 @@ true.
     ((gethash p tbl) (gethash p tbl))
     (t (nth (random 3) actions))))
   }
+  ◊p{
+    See also: ◊a[#:href "https://twobithistory.org/2018/10/14/lisp.html"]{How Lisp became God's own programming language}
+  }
+}
 ◊m-back
