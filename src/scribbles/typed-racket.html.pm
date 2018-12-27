@@ -94,9 +94,9 @@
   (filter
   ; a localized Typed Racket region
    (with-type
-       #:result (Number -> Boolean)
-       #:freevars ([is-multiple-of (-> Number Number Boolean)])
-    (lambda ([i : Number])
+       #:result (Natural -> Boolean)
+       #:freevars ([is-multiple-of (-> Natural Natural Boolean)])
+    (lambda ([i : Natural])
       (or (is-multiple-of i 3)
           (is-multiple-of i 5))
       )) xs))
