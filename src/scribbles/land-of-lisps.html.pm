@@ -108,7 +108,7 @@ true.
     (t (nth (random 3) actions))))
   }
   ◊p{
-    See also: ◊a[#:href "https://twobithistory.org/2018/10/14/lisp.html"]{How Lisp became God's own programming language}
+    See also: ◊a[#:href "https://twobithistory.org/2018/10/14/lisp.html"]{How Lisp became God's own programming language} and ◊a[#:href "http://languagelog.ldc.upenn.edu/myl/llog/jmc.pdf"]{The Roots of Lisp}
   }
 }
 ◊m-back

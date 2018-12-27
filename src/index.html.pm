@@ -2,7 +2,7 @@
 
 ◊h1{kenny shen}
 ◊m-row{
-  ◊p{I'm a software engineer from Singapore. Right now, I'm working at ◊a[#:href "https://www.anapi.co"]{Anapi}, and logging my miles towards a math major at the ◊a[#:href "https://www.open.ac.uk"]{Open U}.}
+  ◊p{I'm a software engineer from Singapore. I'm currently working at ◊a[#:href "https://www.anapi.co"]{Anapi}, and logging my miles towards a math major at the ◊a[#:href "https://www.open.ac.uk"]{Open U}.}
   ◊p{I have been coding in various domains and languages, notably Javascript, Python and Haskell over the last 10 years. I've been focused of late on discovering AI and language oriented programming, and correspondingly, languages like Lisp, Racket and Mercury.}
   ◊p{I love being curious and making sense of things and how they fit together. Some of my thoughts, notes and side projects can be found below.}
   ◊p{
@@ -20,6 +20,7 @@
 ◊m-row{
   ◊h2{scribbles}
   ◊ul{
+    ◊li{◊a[#:href "scribbles/typed-racket.html"]{Typed Racket} ◊sup{Exploring gradual typing in Racket}}
     ◊li{◊a[#:href "scribbles/racklog.html"]{Racklog} ◊sup{Racket extended with logic programming}}
     ◊li{◊a[#:href "scribbles/land-of-lisps.html"]{Beginning AI} ◊sup{First explorations via Lisp}}
     ◊li{◊a[#:href "scribbles/terser-import-declarations.html"]{Terser import declarations} ◊sup{More fun with ghc-exactprint}}
