@@ -2,10 +2,10 @@
 
 ◊h1{Racklog}
 ◊h2{Racket extended with logic programming}
-◊p{
-	TIL today that there's ◊a[#:href "https://docs.racket-lang.org/racklog/index.htm://docs.racket-lang.org/racklog/index.html"]{Racklog}, an embedding of Prolog-style within Racket. I had fun following through the short introduction just to see how it measured up.
-}
 ◊m-article{
+ ◊p{
+	TIL today that there's ◊a[#:href "https://docs.racket-lang.org/racklog/index.htm://docs.racket-lang.org/racklog/index.html"]{Racklog}, an embedding of Prolog-style within Racket. I had fun following through the short introduction just to see how it measured up.
+  }
   ◊m-code-racket{
 #lang racket
 
