@@ -128,10 +128,24 @@
     ([ds (map
            ((curry vertex-degree) g)
            (get-vertices g))])
-    (= (length ds) (set-count (list->set ds)))))
+    (or
+      (= (length ds) (set-count (list->set ds)))
+      (> 1 (set-count (list->set ds))))))
 
 (check-equal? (irregular-graph? w1-g) #t)
 (check-equal? (irregular-graph? w2-g) #f)
+(check-equal? (irregular-graph? denser-g) #f)
+  }
+  ◊p{In contrast, if every vertex of a graph has the same degree, then it's said to be regular. Also, if we have a complete graph, then the complement would have 0 edges.}
+  ◊m-code-racket{
+(define r5-g (make-g '(a b c d e)))
+(check-equal? (irregular-graph? r5-g) #f)
+(check-equal? (get-edges (get-complement r5-g)) '())
+  }
+  ◊div[#:class "columns is-centered"]{
+    ◊figure[#:style "padding: 2rem;"]{
+      ◊img[#:src "/assets/images/graph-r5.png"]{}
+    }
   }
   ◊p{◊em{To be continued...}}
 }
