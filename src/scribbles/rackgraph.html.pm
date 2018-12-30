@@ -89,6 +89,50 @@
       ◊img[#:src "/assets/images/graph-p-comp.png"]{}
     }
   }
+  ◊p{From here we can consider the idea of ◊em{multigraphs}, which are graphs with multiple parallel edges joining same pairs of vertices. As before, we ignore the notion of direction.}
+  ◊m-code-racket{
+(define w1-g (weighted-graph/undirected '((1 a b) (2 b c) (3 a c))))
+(check-equal? (edge-weight w1-g 'a 'c) 3)
+  }
+  ◊div[#:class "columns is-centered"]{
+    ◊figure[#:style "padding: 2rem;"]{
+      ◊img[#:src "/assets/images/graph-weighted.png"]{}
+    }
+  }
+  ◊p{The degree of a vertex in a weighted graph is simply the sum of the weights of the edges incident to it. Let's implement a function to check that,}
+  ◊m-code-racket{
+(define (vertex-in-pair v p)
+  (or
+    (equal? (car p) v)
+    (equal? (cadr p) v)))
+(define (edge-weight-from-pair g p)
+  (edge-weight g (car p) (cadr p)))
+(define (vertex-degree g v)
+  (/ (apply +
+    (map
+      ((curry edge-weight-from-pair) g)
+      (filter
+        ((curry vertex-in-pair) v)
+        (get-edges g)))) 2))
+
+(check-equal? (vertex-degree w1-g 'a) 4)
+(check-equal? (vertex-degree w1-g 'b) 3)
+(check-equal? (vertex-degree w1-g 'c) 5)
+  }
+  ◊p{In addition, a weighted graph is said to be ◊em{irregular} if the vertices have distinct degrees.}
+  ◊m-code-racket{
+; A counter-example
+(define w2-g (weighted-graph/undirected '((1 a b) (1 b c) (3 a c))))
+(define (irregular-graph? g)
+  (let*
+    ([ds (map
+           ((curry vertex-degree) g)
+           (get-vertices g))])
+    (= (length ds) (set-count (list->set ds)))))
+
+(check-equal? (irregular-graph? w1-g) #t)
+(check-equal? (irregular-graph? w2-g) #f)
+  }
   ◊p{◊em{To be continued...}}
 }
 ◊m-back
