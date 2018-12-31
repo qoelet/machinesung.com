@@ -147,6 +147,50 @@
       ◊img[#:src "/assets/images/graph-r5.png"]{}
     }
   }
+  ◊m-code-racket{
+; Subgraphs
+; A graph H is a subgraph of graph G
+(define (subgraph? h g)
+  (and
+    (subset?
+      (list->set (get-edges h))
+      (list->set (get-edges g)))
+    (subset?
+      (list->set (get-vertices h))
+      (list->set (get-vertices g)))))
+
+(define denser-h (unweighted-graph/undirected '((a b) (b c))))
+(check-equal? (subgraph? denser-h denser-g) #t)
+(check-equal? (subgraph? denser-g denser-g) #t)
+
+(define (spanning-subgraph? h g)
+  (and
+    (subgraph? h g)
+    (equal?
+      (get-vertices h)
+      (get-vertices g))))
+
+(define spanning-h (unweighted-graph/undirected '((a b) (b c) d)))
+(check-equal? (spanning-subgraph? denser-h denser-g) #f)
+(check-equal? (spanning-subgraph? spanning-h denser-g) #t)
+
+; Connectedness in graphs
+; The graph package provides `cc`
+(define (connected g x y)
+  (define (in-g x y g-lst)
+    (and
+      (not (equal? #f (member x g-lst)))
+      (not (equal? #f (member y g-lst)))))
+  (ormap
+    (((curry in-g) x) y) (cc g)))
+
+(define (disconnected g x y)
+  (not (connected g x y)))
+
+(check-equal? (connected denser-g 'a 'd) #t)
+(check-equal? (connected spanning-h 'a 'd) #f)
+(check-equal? (disconnected spanning-h 'a 'd) #t)
+  }
   ◊p{◊em{To be continued...}}
 }
 ◊m-back
