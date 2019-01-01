@@ -191,6 +191,30 @@
 (check-equal? (connected spanning-h 'a 'd) #f)
 (check-equal? (disconnected spanning-h 'a 'd) #t)
   }
+  ◊p{A ◊em{bridge} is an edge of a graph if and only if it does not belong to a cycle in the graph. I highlighted these red in the generated graph image:}
+  ◊m-code-racket{
+(define (is-bridge? g u v)
+  (let*
+    ([new-g (graph-copy g)])
+    (remove-edge! new-g u v)
+    (and
+      (disconnected new-g u v)
+      (<
+        (length (cc g))
+        (length (cc new-g))))))
+
+(define bridged-g (unweighted-graph/undirected '((a b) (b c) (a c) (c d) (d e))))
+(check-equal? (is-bridge? bridged-g 'a 'b) #f)
+(check-equal? (is-bridge? bridged-g 'b 'c) #f)
+(check-equal? (is-bridge? bridged-g 'a 'c) #f)
+(check-equal? (is-bridge? bridged-g 'c 'd) #t)
+(check-equal? (is-bridge? bridged-g 'd 'e) #t)
+  }
+  ◊div[#:class "columns is-centered"]{
+    ◊figure[#:style "padding: 2rem;"]{
+      ◊img[#:src "/assets/images/graph-bridge.png"]{}
+    }
+  }
   ◊p{◊em{To be continued...}}
 }
 ◊m-back
