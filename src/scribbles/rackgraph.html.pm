@@ -215,6 +215,18 @@
       ◊img[#:src "/assets/images/graph-bridge.png"]{}
     }
   }
+  ◊p{Lastly, we want to consider the notion of direction in graphs. A very common construction is that of a binary tree (or decision tree,}
+  ◊m-code-racket{
+(define b-tree
+  (unweighted-graph/directed '((a b) (a c) (c d) (c e))))
+(check-equal? (has-edge? b-tree 'a 'b) #t)
+(check-equal? (has-edge? b-tree 'b 'a) #f)
+  }
+  ◊div[#:class "columns is-centered"]{
+    ◊figure[#:style "padding: 2rem;"]{
+      ◊img[#:src "/assets/images/graph-btree.png"]{}
+    }
+  }
   ◊p{◊em{To be continued...}}
 }
 ◊m-back
