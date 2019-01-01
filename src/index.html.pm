@@ -2,19 +2,14 @@
 
 ◊h1{kenny shen}
 ◊m-row{
-  ◊p{I'm a software engineer from Singapore. I'm currently working at ◊a[#:href "https://www.anapi.co"]{Anapi}, and logging my miles towards a math major at the ◊a[#:href "https://www.open.ac.uk"]{Open U}.}
-  ◊p{I have been coding in various domains and languages, notably Javascript, Python and Haskell over the last 10 years. I've been focused of late on discovering AI and language oriented programming, and correspondingly, languages like Lisp, Racket and Mercury.}
-  ◊p{I love being curious and making sense of things and how they fit together. Some of my thoughts, notes and side projects can be found below.}
+  ◊p{I'm a software engineer from Singapore. Aside from my day job, I'm also logging my miles towards a math major at the ◊a[#:href "https://www.open.ac.uk"]{Open U}.}
+  ◊p{I have been coding in various domains and languages, notably Javascript, Python and Haskell. I love being curious and making sense of things and how they fit together.}
   ◊p{
-    Solo
     ◊a[#:href "https://github.com/qoelet"]{Github} |
     ◊a[#:href "https://gitlab.com/qoelet"]{Gitlab} |
-    ◊a[#:href "https://www.linkedin.com/in/kenny-shen/"]{LinkedIn}
-  }
-  ◊p{
-    Team
     ◊a[#:href "https://dev.to/commonshost/"]{Commons/Dev} |
-    ◊a[#:href "https://github.com/kowainik/"]{Kowainik/Github}
+    ◊a[#:href "https://github.com/kowainik/"]{Kowainik/Github} |
+    ◊a[#:href "https://www.linkedin.com/in/kenny-shen/"]{LinkedIn}
   }
 }
 ◊m-row{
