@@ -215,7 +215,7 @@
       ◊img[#:src "/assets/images/graph-bridge.png"]{}
     }
   }
-  ◊p{Lastly, we want to consider the notion of direction in graphs. A very common construction is that of a binary tree (or decision tree,}
+  ◊p{Lastly, we want to consider the notion of direction in graphs. A very common construction is that of a binary or decision tree,}
   ◊m-code-racket{
 (define b-tree
   (unweighted-graph/directed '((a b) (a c) (c d) (c e))))
@@ -226,6 +226,65 @@
     ◊figure[#:style "padding: 2rem;"]{
       ◊img[#:src "/assets/images/graph-btree.png"]{}
     }
+  }
+  ◊m-code-racket{
+; Example: the fake coin problem
+(define foo-btree
+  (unweighted-graph/directed '(
+    (start a-is-lighter)
+    (start b-is-lighter)
+    (a-is-lighter 1-is-fake)
+    (a-is-lighter 2-is-fake)
+    (b-is-lighter 3-is-fake)
+    (b-is-lighter 4-is-fake))))
+
+; Only works for 1-2-4 trees
+(define (traverse-tree g d)
+  (define (reconstruct-tree n ns)
+    (cond
+      [(empty? ns) (list n)]
+      [else
+        (list
+          (list n (car ns))
+          (list n (cadr ns)))]))
+  (let*
+    [(new-g (graph-copy g))
+     (top-node
+       (car (tsort new-g)))
+     (next-nodes
+       (sort (get-neighbors new-g top-node) symbol<?))
+     ]
+    (cond
+      [(equal? d 'left)
+       (unweighted-graph/directed
+         (reconstruct-tree (car next-nodes)
+           (get-neighbors new-g (car next-nodes))))]
+      [else
+        (unweighted-graph/directed
+          (reconstruct-tree (cadr next-nodes)
+            (get-neighbors new-g (cadr next-nodes))))])))
+
+(define (solve tree coins)
+  (cond
+    [(= (length coins) 4)
+     (cond
+       [(= (car coins) (cadr coins))
+        (solve
+          (traverse-tree tree 'right)
+            (cddr coins))]
+       [else
+        (solve
+          (traverse-tree tree 'left)
+            (list (car coins) (cadr coins)))])]
+    [else
+      (cond
+       [(< (car coins) (cadr coins))
+        (traverse-tree tree 'left)]
+       [else
+         (traverse-tree tree 'right)])]))
+
+(check-equal?  (solve foo-btree '(1 1 1 0))
+  (unweighted-graph/directed '(4-is-fake)))
   }
   ◊p{◊em{To be continued...}}
 }
