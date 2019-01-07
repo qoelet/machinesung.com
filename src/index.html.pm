@@ -15,6 +15,8 @@
 ◊m-row{
   ◊h2{scribbles}
   ◊ul{
+    ◊li{◊a[#:href "scribbles/haskgraph.html"]{More graph theory} ◊sup{Computing with Alga}}
+    ◊li{Cuckoo filters ◊sup{wip}}
     ◊li{◊a[#:href "scribbles/rackgraph.html"]{Basic graph theory} ◊sup{Computing with Racket and graphviz}}
     ◊li{◊a[#:href "scribbles/typed-racket.html"]{Typed Racket} ◊sup{Exploring gradual typing in Racket}}
     ◊li{◊a[#:href "scribbles/racklog.html"]{Racklog} ◊sup{Racket extended with logic programming}}
