@@ -15,8 +15,6 @@
 ◊m-row{
   ◊h2{scribbles}
   ◊ul{
-    ◊li{◊a[#:href "scribbles/haskgraph.html"]{More graph theory} ◊sup{Computing with Alga}}
-    ◊li{Cuckoo filters ◊sup{wip}}
     ◊li{◊a[#:href "scribbles/rackgraph.html"]{Basic graph theory} ◊sup{Computing with Racket and graphviz}}
     ◊li{◊a[#:href "scribbles/typed-racket.html"]{Typed Racket} ◊sup{Exploring gradual typing in Racket}}
     ◊li{◊a[#:href "scribbles/racklog.html"]{Racklog} ◊sup{Racket extended with logic programming}}
@@ -24,7 +22,6 @@
     ◊li{◊a[#:href "scribbles/terser-import-declarations.html"]{Terser import declarations} ◊sup{More fun with ghc-exactprint}}
     ◊li{◊a[#:href "scribbles/ghc-api.html"]{Source modifications} ◊sup{via GHC API and ghc-exactprint}}
     ◊li{◊a[#:href "scribbles/sums-of-products.html"]{Sums of products (and carbs)} ◊sup{Fun with datatypes and representations}}
-    ◊li{◊a[#:href "scribbles/typeapplications.html"]{GHC extension - TypeApplications} ◊sup{Providing type arguments explicitly}}
     ◊li{◊a[#:href "scribbles/powersets-fun.html"]{Power sets} ◊sup{Deconstruction of a nifty expression}}
     ◊li{◊a[#:href "scribbles/monad-transformers.html"]{Exception handling} ◊sup{Handling exceptions neatly via monad transformers}}
     ◊li{◊a[#:href "scribbles/haskell-to-beanstalk.html"]{Deploying Haskell applications to Beanstalk} ◊sup{via CircleCI workflows}}
