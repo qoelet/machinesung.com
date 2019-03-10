@@ -62,5 +62,24 @@ isDockerServiceRunning (DockerService serviceName) (Project project) dockerConfi
     ...
     }
   }
+  ◊p{It was fun to write functions that would do the equivalent job of commands used in the shell. For example, ◊code{ln -sf foo/* .} for linking some development files; I ended up with the following}
+  ◊p{
+    ◊m-code-haskell{
+createFileLinks :: FilePath -> FilePath -> IO ()
+createFileLinks source destination = do
+  files <- listDirectory source
+  forM_ files $ \file -> do
+    isFile <- doesFileExist (source </> file)
+    isDir <- doesDirectoryExist (source </> file)
+    when isFile $ do
+      linkExists <- doesFileExist (destination </> file)
+      unless linkExists $
+        createFileLink (source </> file) (destination </> file)
+    when isDir $ do
+      createDirectoryIfMissing False (destination </> file)
+      createFileLinks (source </> file) (destination </> file)
+    }
+  }
+  ◊p{Isn't Haskell such a nice imperative language? :)}
 }
 ◊m-back
