@@ -2,8 +2,9 @@
 
 ◊h1{kenny shen}
 ◊m-row{
-  ◊p{I'm a software engineer from Singapore. Aside from my day job, I'm also logging my miles towards a math major at the ◊a[#:href "https://www.open.ac.uk"]{Open U}.}
+  ◊p{I'm a technologist and entrepreneur, and a cofounder at ◊a[#:href "https://anapi.co"]{Anapi}. I've worked at many startups, including 90 Seconds, Zalora and Tripvillas.}
   ◊p{I have been coding in various domains and languages, notably Javascript, Python and Haskell. I love being curious and making sense of things and how they fit together.}
+  ◊p{Presently, I'm clocking my miles towards a math major at the ◊a[#:href "https://www.open.ac.uk"]{Open U}. In my free time, I do Olympic weightlifting and callisthenics, and read too much space opera.}
   ◊p{
     ◊a[#:href "https://github.com/qoelet"]{Github} |
     ◊a[#:href "https://gitlab.com/qoelet"]{Gitlab} |
