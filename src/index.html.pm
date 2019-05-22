@@ -2,9 +2,9 @@
 
 ◊h1{kenny shen}
 ◊m-row{
-  ◊p{I'm a technologist and entrepreneur, and a cofounder at ◊a[#:href "https://anapi.co"]{Anapi}. I've worked at many startups, including 90 Seconds, Zalora and Tripvillas.}
+  ◊p{I'm a technologist and entrepreneur, and a cofounder at ◊a[#:href "https://anapi.co"]{Anapi}. I've worked at many startups, including Grain, 90 Seconds, Zalora and Tripvillas.}
   ◊p{I have been coding in various domains and languages, notably Javascript, Python and Haskell. I love being curious and making sense of things and how they fit together.}
-  ◊p{Presently, I'm clocking my miles towards a math major at the ◊a[#:href "https://www.open.ac.uk"]{Open U}. In my free time, I do Olympic weightlifting and callisthenics, and read too much space opera.}
+  ◊p{Presently, I'm clocking my miles towards a math major at the ◊a[#:href "https://www.open.ac.uk"]{Open U}. In my free time, I do Olympic weightlifting and calisthenics, and read too much space opera.}
   ◊p{
     ◊a[#:href "https://github.com/qoelet"]{Github} |
     ◊a[#:href "https://gitlab.com/qoelet"]{Gitlab} |
@@ -16,6 +16,7 @@
 ◊m-row{
   ◊h2{scribbles}
   ◊ul{
+    ◊li{◊a[#:href "scribbles/datalog.html"]{Datalog} ◊sup{Logical queries in Racket}}
     ◊li{◊a[#:href "scribbles/shake.html"]{Exploring Shake} ◊sup{Having fun with an existing Makefile}}
     ◊li{◊a[#:href "scribbles/rackgraph.html"]{Basic graph theory} ◊sup{Computing with Racket and graphviz}}
     ◊li{◊a[#:href "scribbles/typed-racket.html"]{Typed Racket} ◊sup{Exploring gradual typing in Racket}}
