@@ -16,6 +16,7 @@
 ◊m-row{
   ◊h2{scribbles}
   ◊ul{
+    ◊li{◊a[#:href "scribbles/kiddie.html"]{Kiddie scripting} ◊sup{Scripting games with my 6 year old son}}
     ◊li{◊a[#:href "scribbles/datalog.html"]{Datalog} ◊sup{Logical queries in Racket}}
     ◊li{◊a[#:href "scribbles/shake.html"]{Exploring Shake} ◊sup{Having fun with an existing Makefile}}
     ◊li{◊a[#:href "scribbles/rackgraph.html"]{Basic graph theory} ◊sup{Computing with Racket and graphviz}}
