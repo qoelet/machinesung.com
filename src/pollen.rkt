@@ -34,6 +34,9 @@
 (define (m-code-lisp . xs)
 	`(pre (code ((class ,(format "~a" "lisp"))) ,@xs)))
 
+(define (m-code-lua . xs)
+	`(pre (code ((class ,(format "~a" "lua"))) ,@xs)))
+
 (define (m-code-racket . xs)
 	`(pre (code ((class ,(format "~a" "racket"))) ,@xs)))
 
