@@ -1,7 +1,33 @@
 #lang pollen/mode racket/base
-(require pollen/tag)
+(require pollen/decode
+         pollen/tag
+         pollen/template
+         txexpr
+         "search-doc.rkt")
 (require rackunit)
 (provide (all-defined-out))
+
+; helpers for RSS feed
+; see blevs.github.io/pollen-feed-tutorial
+(define (title post)
+  (select 'h1 post))
+(define root-url "https://machinesung.com/")
+(define (pagenode-url pagenode)
+  (format "~a~a" root-url pagenode))
+(define (post-date-rfc-3339 post)
+  (select-from-metas 'publish-date-post))
+(define (uuid post)
+  (string-append "urn:uuid:" (select-from-metas 'uuid post)))
+(define (summary post)
+  (search-doc post (λ (x)
+                      (equal? 'p (get-tag x)))))
+(define (root . items)
+  (decode (make-txexpr 'root '() items)
+          #:txexpr-elements-proc
+          (λ (x) (detect-paragraphs x #:linebreak-proc
+                  (λ (x) (detect-linebreaks
+                            x #:insert " "))))))
+
 
 ; tags
 (define a (default-tag-function 'a))
