@@ -6,10 +6,10 @@
   ◊p{I have been coding in various domains and languages, notably Javascript, Python and Haskell. I love being curious and making sense of things and how they fit together.}
   ◊p{Presently, I'm clocking my miles towards a math major at the ◊a[#:href "https://www.open.ac.uk"]{Open U}. In my free time, I do Olympic weightlifting and calisthenics, and read too much space opera.}
   ◊p{
+    ◊a[#:href "https://anapi.co"]{Anapi} |
     ◊a[#:href "https://github.com/qoelet"]{Github} |
     ◊a[#:href "https://gitlab.com/qoelet"]{Gitlab} |
     ◊a[#:href "https://dev.to/commonshost/"]{Commons/Dev} |
-    ◊a[#:href "https://github.com/kowainik/"]{Kowainik/Github} |
     ◊a[#:href "https://www.linkedin.com/in/kenny-shen/"]{LinkedIn}
   }
 }
